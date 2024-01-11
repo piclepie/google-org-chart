@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+    </script>
+    <style type="text/css" media="print">
+        @page {
+            size: landscape;
+        }
+    </style>
+    <style>
+        @page {
+            size: landscape;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box;
+            line-height: 1;
+        }
+        
+        .navbar {
+            font-size: 18px;
+            background-color: #e3f2fd72 !important;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(89, 134, 212, 0.25) 0px 4px 8px -2px, rgba(48, 93, 170, 0.08) 0px 0px 0px 1px;
+            padding: 30px;
+        }
+        
+        .navbar-collapse {
+            flex-basis: 100%;
+            -webkit-box-flex: 1;
+            flex-grow: 1;
+            -webkit-box-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .navbar ul li {
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+        
+        .card {
+            margin-bottom: 15px;
+            margin-top: 20px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        
+        .nodeClass {
+            background: #e1e5ea;
+            color: #030404;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+        
+        .selectedNodeClass {
+            background: #e6a737;
+            color: #111;
+        }
+        
+        .google-visualization-orgchart-node-medium {
+            vertical-align: top;
+            width: 100px;
+        }
+        
+        .new-nav-bar {
+            width: 100%;
+            top: 0;
+            position: fixed;
+            display: block;
+            align-items: center;
+            margin-top: 0;
+            justify-content: center;
+            margin-left: 0;
+        }
+        
+        .anchor {
+            display: block;
+            height: 150px;
+            margin-top: -130px;
+            visibility: hidden;
+        }
+        
+        .chart_title {
+            font-size: 30px;
+            margin: auto;
+            text-align: center;
+        }
+        
+        .divider {
+            background-color: #878787;
+            height: 0.5px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+        
+        .chart {
+            text-align: center;
+            display: block;
+            width: 100%;
+            page-break-after: always;
+            min-height: 1400px;
+        }
+        
+         ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: #878787;
+            box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+        }
+        
+        #ul___xxx {
+            height: 600px;
+            overflow: auto;
+            font-size: 13px;
+        }
+        
+        .flex-container {
+            display: flex;
+        }
+        
+        .flex-child {
+            flex: 1;
+        }
+        
+        .flex-child:first-child {
+            margin-right: 5px;
+        }
+        
+        .profileA {
+            background: #e1e5ea;
+            color: #030404;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+        
+        .profileL {
+            background: #ade8ff;
+            color: #030404;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+        
+        .profileFT {
+            background: #F9E79F;
+            color: #030404;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+        
+        .profileFH {
+            background: #76D7C4;
+            color: #030404;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+        
+        .profileFH .profile-name {
+            width: 70px;
+            word-wrap: break-word;
+            left: 20%;
+        }
+        
+        .profileFH .profile-title {
+            width: 70px;
+            word-wrap: break-word;
+            left: 20%;
+        }
+        
+        .profile-name {
+            font-size: 15px;
+            word-wrap: break-word;
+        }
+        
+        .profile-title {
+            font-size: 11px;
+            margin-top: 2px;
+            word-wrap: break-word;
+        }
+        
+        .profile-salary {
+            font-size: 11px;
+        }
+        
+        .color_example {
+            margin-bottom: 5%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .color_text {
+            margin-top: 3%;
+            display: flex;
+            justify-content: center;
+            font-size: 30px;
+            padding: 15px;
+        }
+        
+        .color_example span {
+            font-size: 25px;
+            padding: 40px;
+            margin-left: 5px;
+        }
+        
+        .form_style {
+            width: 80%;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            margin-left: 10%;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        #side_bar {
+            height: 800px;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 10%;
+            border: 1px solid black;
+            border-radius: 3px;
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+        
+        #logoset {
+            position: absolute;
+            left: 4%;
+        }
+        
+        .chart_container {
+            width: 95%;
+            align-items: center;
+            margin-left: 2.5%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <a class="navbar-brand" id="logoset">
+                    <img  width="200" height="50" alt="">
+                </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" >Home
+            </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" >Organization Chart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="side_bar">
+        <div style="margin: 5px 5px 5px 5px;">
+            <h5>Navigation</h5>
+            <div class="divider"></div>
+            <div style=" display: inline-block;">
+                <button type="button" id="hide_salary" class="btn btn-link" style=" font-size: 14px;">Hide Salary</button>
+                <button type="button" id="print" class="btn btn-link" style=" font-size: 14px;">Print</button>
+            </div>
+            <div class="divider"></div>
+            <ul class="list-inline" id="ul___xxx">
+            </ul>
+        </div>
+    </div>
+
+
+    {data} {chart_setting}
+
+    <!-- below are scripts and functions -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <!--<?!= include("OrgChartpage-js"); ?>-->
+    <script>
+        var chart_Setting = JSON.parse(atob($('#chart_setting').attr('data-list')));
+
+        google.charts.load('current', {
+            packages: ["orgchart"]
+        });
+
+        google.charts.setOnLoadCallback(drawChart);
+
+        function create_chart_element(chart_Setting) {
+            const list = Object.keys(chart_Setting);
+            const arr = new Array();
+            for (dept in list) {
+                const id = list[dept];
+                const dept_name = list[dept].split("_chart_id")[0];
+                const template = `<div class="chart">
+                    <span class="anchor" id="${dept_name}"></span>
+                    <div class="chart_title">${dept_name}
+                        <span id="cnumber"></span>
+                        <div class="divider"></div>
+                    </div>
+                    <div id="${id}"></div>
+                    <div class="divider"></div>
+                </div>`;
+
+                arr.push(template);
+
+            }
+            return arr.join("");
+        }
+
+        function navi_bar_list(chart_Setting) {
+            const list = Object.keys(chart_Setting);
+            const arr = new Array();
+            for (dept in list) {
+                const id = list[dept];
+                const dept_name = list[dept].split("_chart_id")[0];
+                const template = `<li class="list-group-item"><a href="#${dept_name}" target="_self">${dept_name}</a></li>`;
+                arr.push(template);
+            }
+            return arr.join("");
+        }
+
+        //when page load , running function
+        $(document).ready(function() {
+
+            //create template from chart setting. charts frames
+            $('#chart_div').append(create_chart_element(chart_Setting));
+            $("#ul___xxx").append(navi_bar_list(chart_Setting));
+
+
+
+
+            $('.profileFH').css('background-color', '#76D7C4');
+            $('.profileFT').css('background-color', '#F9E79F');
+
+            $("div[data-group]").each(function() {
+                var parent = $(this).parent();
+                const $child = $(this).children();
+                if ($child.length >= 5) {
+                    for (var i = 0, len = $child.length; i < len; i += 2) {
+                        $child.slice(i, i + 2).wrapAll('<div class="flex-container"/>');
+                    }
+                    parent.css('min-width', '200px');
+                    parent.css('max-width', '400px');
+                } else {
+                    parent.css('min-width', '100px');
+                }
+                $(this).css('width', parent.width());
+            });
+
+            // mouse move over to show the side bar
+            $("body").on("mousemove", function(event) {
+                if (event.pageX < 280) {
+                    $('#side_bar').show();
+                } else {
+                    $('#side_bar').hide();
+                }
+            });
+
+
+        }); //document ready function
+
+        $('#hide_salary').on('click', () => {
+            $('.profile-salary').toggle();
+            if ($('#hide_salary').text() == 'Hide Salary') {
+                $('#hide_salary').text('Show Salary');
+            } else {
+                $('#hide_salary').text('Hide Salary');
+            }
+        });
+        $('#print').on('click', function() {
+            $('#side_bar').hide();
+            $('.navbar').hide();
+            $('#chart_div').removeClass("chart_container");
+            window.print();
+            $('#chart_div').addClass("chart_container");
+            $('.navbar').show();
+        });
+
+        const options = {
+            allowCollapse: true,
+            allowHtml: true,
+            nodeClass: "nodeClass",
+            selectedNodeClass: "selectedNodeClass",
+            //size:"small"
+        };
+
+        $('#realtimeData').click(function() {
+            $(this).text("Please Wait...");
+            $(this).attr("disabled", true);
+
+            google.script.run
+                .withSuccessHandler(function(data_returned) {
+                    drawChart(data_returned);
+                    $("#realtimeData").text("OrgChart Data Updated");
+                })
+                .withFailureHandler(function() {
+                    alert("Data Refreshing Failed.. Error Unknown")
+                })
+                .update_OrgChartData();
+        });
+
+        function drawChart(data_returned) {
+            data_returned = data_returned == undefined ? JSON.parse(atob($('#datalist').attr('data-list'))) : data_returned;
+            for (chartid in chart_Setting) {
+                const sobj = chart_Setting[chartid];
+                //['', 'list', 'index', 'extend','by']
+                let chartData = chart_Setting[chartid]['by'] == 'key' ? org_chart_by_header(data_returned, sobj.list[0], sobj.index) : org_chart_by_manager_extend(data_returned, sobj.list, sobj.index, sobj.extend);
+                //let chartData = chartid == 'Legal&RiskManagement_chart_id' ? org_chart_by_header(data_returned, sobj.orglevel, sobj.value) : org_chart_by_manager_extend(data_returned, sobj.list, sobj.index, sobj.extend);
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Name');
+                data.addColumn('string', 'Manager');
+                data.addColumn('string', 'ToolTip');
+                //For each orgchart box, provide the name, manager, and tooltip to show.
+                data.addRows(chartData.normal);
+                var nodes = chartData.non_manager_role;
+                //Create the chart.
+                var chart = new google.visualization.OrgChart(document.getElementById(chartid));
+                //Draw the chart, setting the allowHtml option to true for the tooltips.
+                chart.draw(data, options);
+                $("div[data-group]").each(function() {
+                    var parent = $(this).parent();
+                    $(this).css('position', 'absolute');
+                    $(this).css('padding-top', '0');
+                    $(this).css('min-width', '100px');
+                    parent.removeClass("google-visualization-orgchart-node");
+                    parent.removeClass("google-visualization-orgchart-node-medium");
+                    parent.css('vertical-align', 'top');
+                    parent.css('padding-top', '0');
+                    var group = $(this).data('group');
+                    if (group !== undefined) {
+                        for (var i = 0; i < nodes.length; i++) {
+                            var node = nodes[i];
+                            if (node[1] === group) {
+                                $(this).append(node[0].f);
+                            }
+                        }
+                        $('div', this).css('margin-bottom', '2px');
+                    }
+                    parent.removeClass('nodeClass');
+                    $(this).css('border', '2px solid #3388dd').css('border-radius', '5px').css('padding', '1px');
+                }); // data group each function
+                $('.profileA').each(function() {
+                    const condition = $(this).closest('.nodeClass').length;
+                    if (condition == 1) {
+                        $(this).removeClass('profileA');
+                    }
+                });
+            }
+            $('.profileFH').css('background-color', '#76D7C4');
+            $('.profileFT').css('background-color', '#F9E79F');
+            $("div[data-group]").each(function() {
+                var parent = $(this).parent();
+                const $child = $(this).children();
+                if ($child.length >= 5) {
+                    for (var i = 0, len = $child.length; i < len; i += 2) {
+                        $child.slice(i, i + 2).wrapAll('<div class="flex-container"/>');
+                    }
+                    parent.css('min-width', '200px');
+                    parent.css('max-width', '400px');
+                } else {
+                    parent.css('min-width', '100px');
+                }
+                $(this).css('width', parent.width());
+            });
+            $('.flex-container').each(function() {
+                $(this).children().addClass("flex-child");
+            });
+            $('.chart').each(function(r) {
+                const length = $(this).find('.profile-name').length;
+                $(this).find('span:eq(1)').text("| HeadCount:" + length);
+                $(this).find('.divider:eq(1)').remove();
+                const body = $(this).find('tbody');
+                let data_gourp_height = $(this).find('[data-group]').height();
+                if (data_gourp_height === undefined) {
+                    data_gourp_height = 0;
+                }
+                const width1 = body.width();
+                const height1 = body.height() + data_gourp_height;
+                if (width1 < 800) {
+                    $('.nodeClass').each(function() {
+                        $(this).css('width', '120px');
+                    })
+                }
+                if (height1 < 300) {
+                    $('.nodeClass').each(function() {
+                        $(this).css('height', '100px');
+                    });
+                } else if (height1 > 800) {
+                    $('.nodeClass').each(function() {
+                        $(this).css('height', '80px');
+                    });
+                }
+            });
+        }
+
+
+        //reuse function
+        function filter_array_2pram(array, header, condition) {
+            //const condition_array = condition.split(',');
+            //push the header to array for future filter otherwise there is no header to filter in the filtered array. 
+            condition.push(header);
+            return array.filter(r => {
+                return condition.indexOf(r[array[0].indexOf(header)].toString().trim()) > -1;
+            });
+        }
+        //exlude//reuse function return exclude filter
+        function filter_array_2pram_exclude(array, header, condition) {
+            //const condition_array = condition.split(',');
+            //push the header to array for future filter otherwise there is no header to filter in the filtered array. 
+            //condition.push(header);
+            return array.filter(r => {
+                return condition.indexOf(r[array[0].indexOf(header)]) === -1
+            });
+        }
+        //reuse function return unique array
+        // return unique data with data and header[index of array]
+        function unique_array_return(array, header) {
+            return [...new Set(array.map(r => r[array[0].indexOf(header)]))];
+        }
+
+        //return all employee by provided manaer number.  start from 2nd one. 
+        //accept employee number in [] format, start index.  
+        function employee_number_list_orgchart(data, employee_number_list, start_index, extend) {
+            let unique_managers_number = unique_array_return(data, 'Supervisor Number').map(r => {
+                return r.toString().trim()
+            });
+            let i = start_index;
+            if (extend === true) {
+                for (i; i < employee_number_list.length; i++) {
+                    if (unique_managers_number.indexOf(employee_number_list[i]) > -1) {
+                        data.filter(r => {
+                            if (r[data[0].indexOf('Supervisor Number')].toString().trim() === employee_number_list[i]) {
+                                employee_number_list.push(r[1].toString().trim());
+                            }
+                        })
+                    }
+                }
+                //return employee list
+                return employee_number_list;
+            } else {
+                let no_extend_employee_list = [];
+                for (i; i < employee_number_list.length; i++) {
+                    data.filter(r => {
+                        if (r[data[0].indexOf('Supervisor Number')].toString().trim() === employee_number_list[i]) {
+                            no_extend_employee_list.push(r[1].toString().trim());
+                        }
+                    })
+                }
+                return no_extend_employee_list;
+            }
+        }
+
+
+        //return orgchart data by department name accept 3 parameters , data, header ()
+        //'Org Level 2' by department , 
+        //'Supervisor Number, by report
+        // last value is fold or not  true. false
+        function org_chart_by_header(data, header, header_value) {
+            let result_array = [];
+            const employee_list_by_dept = filter_array_2pram(data, header, [header_value]);
+            const employee_list_number_only = unique_array_return(employee_list_by_dept, 'Employee Number');
+            let unique_managers_number = unique_array_return(employee_list_by_dept, "Supervisor Number");
+
+            // employee_list_by_dept.map(r => {
+            //     return r[4].trim()
+            // }); 
+            // //Supervisor Number
+            // let unique_managers_number = [...new Set(managers_numbers)]
+            unique_managers_number.shift();
+            employee_list_by_dept.shift();
+
+            let slice_number = employee_list_by_dept.lengt >= 35 ? 2 : 3;
+
+            return custom_re_org_data(employee_list_by_dept, unique_managers_number, slice_number)
+
+        }
+
+
+
+
+        //return by manager name
+        function org_chart_by_manager_extend(data, header_value, start_index, extend, regroup) {
+            let result_array = [];
+            const employee_list_number_only = employee_number_list_orgchart(data, header_value, start_index, extend);
+            const employee_list_by_dept = filter_array_2pram(data, 'Employee Number', employee_list_number_only);
+
+            //manager name
+            let unique_managers_number = unique_array_return(employee_list_by_dept, "Supervisor Number")
+                // employee_list_by_dept.map(r => {
+                //     return r[4].trim()
+                // });
+                // console.log(managers_numbers)
+                //     //unique_array_return(employee_list_by_dept,"Supervisor Name")
+
+            // let unique_managers_number = [...new Set(managers_numbers)]
+
+            //pop out the header'Employee Number'
+            //employee_list_number_only.pop();
+            //shift the header of 'Supervisor Number'
+            unique_managers_number.shift();
+            employee_list_by_dept.shift();
+
+            let slice_number = employee_list_by_dept.lengt >= 35 ? 2 : 3;
+
+            return custom_re_org_data(employee_list_by_dept, unique_managers_number, slice_number)
+
+        }
+
+        function custom_re_org_data(employee_list_by_dept, unique_managers_number, slice_number) {
+
+            if (employee_list_by_dept.length > 18) {
+                let employees_only = [];
+                let employees_with_manager = [];
+                let placeholder_manager_id = [];
+
+                for (i in unique_managers_number) {
+                    // const numbers_of_report = employee_list_by_dept.filter(r => {  return r[4].trim() === unique_managers_number[i]}).length;
+                    const employee_numbers_for_each_group = employee_list_by_dept.filter(r => {
+                        return r[5].trim() === unique_managers_number[i]
+                    }).map(r => r[1].trim());
+
+                    //return group member is not manager role.
+                    const group_number = employee_numbers_for_each_group.filter(r => {
+                        return unique_managers_number.indexOf(r) === -1
+                    });
+
+                    if (group_number.length >= slice_number) {
+                        //placeholder_manager_id.push(unique_managers_number[i].trim())
+                        employee_list_by_dept.filter(r => {
+                            if (group_number.indexOf(r[1].trim()) > -1 && r[5].trim() == unique_managers_number[i].trim()) {
+                                employees_only.push(r);
+                                // placeholder id as manager name
+                                placeholder_manager_id.push(r[4]);
+                            }
+                        });
+                    }
+                } // for loop
+                const node1_names = employees_only.map(r => r[1].trim());
+                //employees_with_manager is regular with manager and employees , reporting length <4 
+                employee_list_by_dept.forEach(r => {
+                    if (node1_names.indexOf(r[1].trim()) == -1) {
+                        employees_with_manager.push(r);
+                    }
+                });
+                let final_result_array = {};
+                final_result_array.normal = return_html_result(employees_with_manager);
+                //push 2d array to the result for the manager  [{v:'G.1', f:'<div data-group="G.1"></div>'}, 'U.2', '']
+                for (i in placeholder_manager_id) {
+                    const k = "$";
+                    const placeholder = placeholder_manager_id[i] + k;
+                    final_result_array.normal.push([{
+                        v: placeholder,
+                        f: "<div data-group='" + placeholder + "'>"
+                    }, placeholder_manager_id[i], '']);
+                    //change the employees manager to the palce holder one.  with $ end of the name.
+                    employees_only.forEach(r => {
+                        if (r[4].trim() === placeholder_manager_id[i]) {
+                            r[4] = placeholder;
+                        }
+                    });
+                }
+                final_result_array.non_manager_role = return_html_result(employees_only);
+                return final_result_array;
+
+            } else {
+
+                let final_result_array = {};
+                final_result_array.normal = return_html_result(employee_list_by_dept);
+                final_result_array.non_manager_role = [];
+                return final_result_array;
+            }
+
+
+        }
+
+
+        //reuse function accept 1 parameter to return the html format data.
+        function return_html_result(data) {
+
+            let result_array = [];
+            //end here. core code  
+            var employeeNames = data.map(r => r[2].toString().trim());
+            // var employeeNameshtml = data.map(r => "<div class='profile" + r[9] + "'>" + "<div class='profile-name'>" + r[2] + "<div class='profile-title '>" + r[3] + "<div class='profile-salary '>" + r[13] + "</div>" + "</div>" + "</div>" + "</div>");
+            var employeeNameshtml = data.map(r => `
+            <div class="profile${r[9]}">
+                <div class='profile-name'>  ${r[2]}  
+                    <div class='profile-title'> ${r[3]} 
+                        <div class='profile-salary'>  ${r[13]} 
+                            <div class='profile-lhd'>  ${new Date(r[17]).toLocaleDateString("en-US") } 
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            //replace 13 to 7 as salary
+            //var employeeLocationshtml = data.map(r =>);
+            var employeeManager = data.map(r => r[4].toString().trim());
+
+            for (let i = 0; i < data.length; i++) {
+                result_array.push(
+                    [{
+                            v: data[i][2],
+                            f: employeeNameshtml[i]
+                                // employeeJobTitles[i] +
+                                // employeeLocationshtml[i]
+                        },
+                        data[i][4],
+                        ""
+                    ]
+                );
+            }
+            return result_array;
+        }
+    </script>
+
+
+
+</body>
+
+</html>
